@@ -1,0 +1,15 @@
+{
+  "name": "repro-nuxtjs-robots-routerules-augmentation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "nuxi prepare",
+    "typecheck": "nuxi typecheck"
+  },
+  "devDependencies": {
+    "@nuxtjs/robots": "6.0.8",
+    "nuxt": "4.4.6",
+    "typescript": "~5.9.0",
+    "vue-tsc": "~3.0.0"
+  }
+}

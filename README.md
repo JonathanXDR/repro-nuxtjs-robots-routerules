@@ -62,7 +62,7 @@ addTypeTemplate({
 The Nuxt config type system resolves `routeRules` through
 `'nitropack/types'`. Sibling Nuxt SEO modules (`@nuxtjs/sitemap`,
 `nuxt-og-image`, `nuxt-security`) augment both module specifiers
-unconditionally; robots is the outlier that gates the second one on a
+unconditionally. Robots is the outlier that gates the second one on a
 flag that most Nuxt 4 projects don't set.
 
 The fix in v6.0.9 (PR #300) replaces the
@@ -72,10 +72,10 @@ directly.
 
 ## Related upstream activity
 
-- Issue [`nuxt-modules/robots#299`](https://github.com/nuxt-modules/robots/issues/299) — original bug report (closed).
-- PR [`#295`](https://github.com/nuxt-modules/robots/pull/295) — *"fix: augment NitroRouteConfig on both nitropack module paths"* (merged, but gated the second augmentation behind the unreliable flag that #300 then replaced).
-- PR [`#300`](https://github.com/nuxt-modules/robots/pull/300) — *"fix(types): broken nuxt v4 check"* (merged, ships the actual fix).
-- Earlier PR [`#212`](https://github.com/nuxt-modules/robots/pull/212) — *"fix(module): declare module `nitropack/types`"* (merged).
+- Issue [`nuxt-modules/robots#299`](https://github.com/nuxt-modules/robots/issues/299), original bug report (closed).
+- PR [`#295`](https://github.com/nuxt-modules/robots/pull/295), *"fix: augment NitroRouteConfig on both nitropack module paths"* (merged, but gated the second augmentation behind the unreliable flag that #300 then replaced).
+- PR [`#300`](https://github.com/nuxt-modules/robots/pull/300), *"fix(types): broken nuxt v4 check"* (merged, ships the actual fix).
+- Earlier PR [`#212`](https://github.com/nuxt-modules/robots/pull/212), *"fix(module): declare module `nitropack/types`"* (merged).
 
 ## Environment
 

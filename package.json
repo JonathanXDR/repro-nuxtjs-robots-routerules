@@ -7,7 +7,7 @@
     "typecheck": "nuxi typecheck"
   },
   "devDependencies": {
-    "@nuxtjs/robots": "6.0.8",
+    "@nuxtjs/robots": "6.1.0",
     "nuxt": "4.4.6",
     "typescript": "6.0.3",
     "vue-tsc": "3.3.2"

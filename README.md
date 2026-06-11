@@ -83,3 +83,26 @@ directly.
 - `@nuxtjs/robots@6.0.8` *(this repro)* / `@nuxtjs/robots@>=6.0.9` *(fixed)*
 - `typescript@6.0.3`
 - Node.js ≥ 20.19
+
+## Follow-up: still reproduces on 6.1.0
+
+`@nuxtjs/robots@6.1.0` (latest as of 2026-06-12) added the
+`declare module 'nitropack/types'` augmentation from issue #299, but
+`npm run typecheck` in this repro still fails with the same TS2353.
+
+The remaining gap: the module registers its type template via
+`addTypeTemplate(..., { nitro: true, nuxt: true })` without
+`node: true` (see `registerTypeTemplates` in `dist/module.mjs`), so the
+generated `.nuxt/types/nuxt-robots-nitro.d.ts` is never referenced from
+`.nuxt/nuxt.node.d.ts`, the context that typechecks `nuxt.config.ts`.
+
+User-side workaround until upstream adds `node: true`:
+
+```ts
+// nuxt.config.ts
+hooks: {
+  'prepare:types'({ nodeReferences }) {
+    nodeReferences.push({ path: 'types/nuxt-robots-nitro.d.ts' })
+  },
+},
+```

@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@nuxtjs/robots": "6.0.8",
-    "nuxt": "4.4.6",
+    "nuxt": "4.4.8",
     "typescript": "6.0.3",
     "vue-tsc": "3.3.2"
   }

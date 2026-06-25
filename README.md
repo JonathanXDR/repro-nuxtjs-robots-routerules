@@ -1,19 +1,19 @@
-# Repro: `@nuxtjs/robots@6.0.8` route rule augmentation missing on `nitropack/types`
+# Repro: `@nuxtjs/robots@6.1.0` route rule type missing from the Nuxt 4 node typecheck context
 
 Minimal Nuxt 4 project that triggers `TS2353` when declaring a `robots`
-route rule in `nuxt.config.ts`. The module's existing
-`'nitropack/types'` augmentation is gated on
-`nuxt.options.future.compatibilityVersion === 4`, which is unset on most
-Nuxt 4 projects, so the second augmentation is silently skipped and
-`routeRules.robots` fails typecheck.
+route rule in `nuxt.config.ts`. `@nuxtjs/robots@6.1.0` ships the
+`NitroRouteConfig.robots` augmentation, but registers its
+`nuxt-robots-nitro.d.ts` type template with `{ nitro: true, nuxt: true }`
+and no `node: true`. In Nuxt 4 `nuxt.config.ts` is typechecked through
+`.nuxt/tsconfig.node.json` / `.nuxt/nuxt.node.d.ts`, which references a
+template only when it is registered with `node: true`. So the
+augmentation never reaches the config typecheck and `routeRules.robots`
+fails with TS2353.
 
-> **Status: fixed.** Tracked as
-> [`nuxt-modules/robots#299`](https://github.com/nuxt-modules/robots/issues/299)
-> and resolved by
-> [`#300`](https://github.com/nuxt-modules/robots/pull/300),
-> shipped in
-> [`v6.0.9`](https://github.com/nuxt-modules/robots/releases/tag/v6.0.9).
-> Upgrade to `@nuxtjs/robots@>=6.0.9` to drop the local type shim.
+> See [`ISSUE.md`](./ISSUE.md) for the bug-template writeup. An earlier,
+> separate variant of this bug (the `future.compatibilityVersion === 4`
+> gate) was fixed in `v6.0.9`. The `node: true` gap below is distinct and
+> still reproduces on the latest `6.1.0`.
 
 ## Steps to reproduce
 
